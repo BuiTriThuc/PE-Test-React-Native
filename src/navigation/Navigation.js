@@ -29,7 +29,7 @@ export default function Navigation() {
         })}
       >
         <Tab.Screen
-          name="Detailss"
+          name="detail"
           component={NaviDetail}
           options={{ tabBarButton: () => null }}
         />

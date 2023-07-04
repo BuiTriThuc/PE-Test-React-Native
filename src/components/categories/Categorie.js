@@ -25,7 +25,16 @@ export default function Category({ handleGetItems }) {
   return (
     <View>
       <View>
-        <Text>Categories</Text>
+        <Text
+          style={{
+            fontSize: 20,
+            fontWeight: "bold",
+            marginLeft: 10,
+            marginBottom: 10,
+          }}
+        >
+          Categories
+        </Text>
       </View>
       <ScrollView
         horizontal
@@ -36,14 +45,25 @@ export default function Category({ handleGetItems }) {
       >
         {categories.map((category, index) => {
           return (
-            <View key={index}>
-              <TouchableOpacity onPress={() => handleChangeCategory(category)}>
+            <View key={index} style={styles.cardCate}>
+              <TouchableOpacity
+                style={styles.category}
+                onPress={() => handleChangeCategory(category)}
+              >
                 <Image
                   style={styles.imageCat}
                   source={{ uri: category.imageCat }}
                 />
+                <Text
+                  style={{
+                    fontSize: 15,
+                    fontWeight: "bold",
+                    paddingTop: 5,
+                  }}
+                >
+                  {category.name}
+                </Text>
               </TouchableOpacity>
-              <Text>{category.name}</Text>
             </View>
           );
         })}
@@ -52,8 +72,28 @@ export default function Category({ handleGetItems }) {
   );
 }
 const styles = StyleSheet.create({
+  cardCate: {
+    marginRight: 30,
+    borderRadius: 10,
+    shadowColor: "black",
+    shadowOpacity: 0.26,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 10,
+    elevation: 3,
+    backgroundColor: "white",
+    marginBottom: 20,
+  },
+  category: {
+    marginBottom: 10,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
   imageCat: {
-    height: 200,
-    width: 200,
+    borderTopRightRadius: 10,
+    borderTopLeftRadius: 10,
+    height: 100,
+    width: 100,
   },
 });

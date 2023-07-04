@@ -13,12 +13,21 @@ export default function Home() {
   };
   return (
     <SafeAreaView>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <Categorie handleGetItems={handleGetItems} />
+      <Categorie handleGetItems={handleGetItems} />
 
-        {/* Content */}
+      {/* Content */}
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View>
-          <Text>List orchid</Text>
+          <Text
+            style={{
+              fontSize: 20,
+              fontWeight: "bold",
+              marginBottom: 10,
+              marginLeft: 10,
+            }}
+          >
+            List orchid
+          </Text>
           {items?.map((item) => {
             return <ItemCategories key={item.id} item={item} />;
           })}

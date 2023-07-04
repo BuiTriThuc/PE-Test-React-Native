@@ -18,6 +18,7 @@ export const Categories = [
         bonus: "a pot",
         origin: "Taiwan",
       },
+
       {
         id: "2",
         name: "Young Min",
@@ -33,7 +34,7 @@ export const Categories = [
       },
       {
         id: "3",
-        name: "Hawaii Wedding Songs",
+        name: "Hawaii Wedding",
         weight: 250,
         rating: "4.2",
         price: 49,
