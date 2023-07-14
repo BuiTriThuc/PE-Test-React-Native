@@ -54,7 +54,7 @@ export const Categories = [
       "https://live.staticflickr.com/65535/48630313466_592b1989d9_b.jpg",
     items: [
       {
-        id: "1",
+        id: "4",
         name: "Blue Spin",
         weight: 250,
         rating: "5.0",
@@ -67,7 +67,7 @@ export const Categories = [
         origin: "Vietnam",
       },
       {
-        id: "2",
+        id: "5",
         name: "Daerei",
         weight: 300,
         rating: "4.5",
@@ -80,7 +80,7 @@ export const Categories = [
         origin: "Thailand",
       },
       {
-        id: "3",
+        id: "6",
         name: "Thongchai Gold",
         weight: 350,
         rating: "4.2",
@@ -101,7 +101,7 @@ export const Categories = [
       "https://res.cloudinary.com/ufn/image/upload/c_pad,f_auto,fl_progressive,h_500,w_445/mkxrvxkdaboxn6xjq5f4.jpg",
     items: [
       {
-        id: "1",
+        id: "7",
         name: "White lady",
         weight: 200,
         rating: "5.0",
@@ -114,7 +114,7 @@ export const Categories = [
         origin: "Taiwan",
       },
       {
-        id: "2",
+        id: "8",
         name: "Pink secret",
         weight: 500,
         rating: "4.5",
@@ -127,7 +127,7 @@ export const Categories = [
         origin: "Taiwan",
       },
       {
-        id: "3",
+        id: "9",
         name: "Yellow Moth",
         weight: 150,
         rating: "4.2",

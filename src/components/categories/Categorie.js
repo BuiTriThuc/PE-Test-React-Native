@@ -19,7 +19,7 @@ export default function Category({ handleGetItems }) {
   }, []);
 
   const handleChangeCategory = (item) => {
-    handleGetItems(item.items);
+    handleGetItems(item);
     setActiveCategory(item.id);
   };
   return (

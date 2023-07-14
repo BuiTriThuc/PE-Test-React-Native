@@ -8,7 +8,7 @@ import { HeartIcon as HeartIconSolid } from "react-native-heroicons/solid";
 export default function ItemCategories({ item, onPressFavorite, isFavorite }) {
   const navigation = useNavigation(item);
   const handlePress = (item) => {
-    navigation.navigate("Detail", { item });
+    navigation.navigate("Detailsss", { item });
   };
 
   return (
