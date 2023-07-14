@@ -5,12 +5,11 @@ import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { HeartIcon as HeartIconOutline } from "react-native-heroicons/outline";
 import { HeartIcon as HeartIconSolid } from "react-native-heroicons/solid";
 
-export default function ItemCategories({ item }) {
+export default function ItemCategories({ item, onPressFavorite, isFavorite }) {
   const navigation = useNavigation(item);
   const handlePress = (item) => {
     navigation.navigate("Detail", { item });
   };
-  const [isFavorite, setIsFavorite] = useState(false);
 
   return (
     <TouchableWithoutFeedback>
@@ -36,14 +35,11 @@ export default function ItemCategories({ item }) {
               <Text style={styles.ratingText}>{item.rating} out of the 5</Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.heart}
-            onPress={() => setIsFavorite(!isFavorite)}
-          >
+          <TouchableOpacity onPress={onPressFavorite} activeOpacity={1}>
             {isFavorite ? (
-              <HeartIconSolid size={30} color={"red"} />
+              <HeartIconSolid size={35} color={"red"} />
             ) : (
-              <HeartIconOutline size={30} color={"#0D1117"} />
+              <HeartIconOutline size={35} color={"red"} />
             )}
           </TouchableOpacity>
         </View>

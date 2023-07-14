@@ -1,15 +1,74 @@
-import React, { useState } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
-import { Image } from "react-native";
-import { Text, View } from "react-native";
-import { HeartIcon as HeartIconOutline } from "react-native-heroicons/outline";
-import { HeartIcon as HeartIconSolid } from "react-native-heroicons/solid";
+import { View, Text, Image, ScrollView } from "react-native";
+import React, { useCallback, useEffect, useState } from "react";
+import { useFocusEffect, useRoute } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { checkItemExisting } from "../../../utils/index";
 const Detail = ({ navigation, route }) => {
-  const { item } = route.params;
-  const [isFavorite, setIsFavorite] = useState(false);
+  const [isItemFavorite, setIsItemFavorite] = useState(false);
+  const [listFavorite, setListFavorite] = useState([]);
+
+  const { params } = useRoute();
+  let { image, name, rating } = params?.item;
+  let { item } = params;
+
+  const getFavouriteList = async () => {
+    try {
+      const favorites = await AsyncStorage.getItem("listFavorite");
+      if (favorites) {
+        const parsedFavorites = JSON.parse(favorites);
+        setListFavorite(parsedFavorites);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (params.item) {
+      let { isTopOfTheWeek } = params.item;
+      setIsItemFavorite(isTopOfTheWeek || false);
+    }
+  }, [params.item]);
+
+  console.log("Check item", item);
+
+  const handleItemFavorite = async () => {
+    try {
+      let favorite = [...listFavorite];
+
+      const isItemExisting = await checkItemExisting(item);
+
+      if (isItemExisting) {
+        const updatedList = favorite.filter((fav) => fav.id !== item.id);
+        await AsyncStorage.setItem("listFavorite", JSON.stringify(updatedList));
+        setListFavorite(updatedList);
+        setIsItemFavorite(false);
+      } else {
+        favorite.push(item);
+        await AsyncStorage.setItem("listFavorite", JSON.stringify(favorite));
+        setListFavorite(favorite);
+        setIsItemFavorite(true);
+      }
+    } catch (error) {
+      console.log("Error: ", error);
+    }
+  };
+
+  useFocusEffect(
+    useCallback(() => {
+      const updateList = async () => {
+        await getFavouriteList();
+      };
+
+      updateList();
+    }, [])
+  );
+
+  console.log("Check list", listFavorite);
 
   return (
-    <View>
+    <View showsVerticalScrollIndicator={false}>
       <Image style={styles.imageDetail} source={{ uri: item.image }} />
       <Text style={styles.name}>{item.name}</Text>
       <View style={styles.rating}>
@@ -43,19 +102,28 @@ const Detail = ({ navigation, route }) => {
             <Text>{item.origin}</Text>
           </View>
         </View>
-        <View style={{ marginLeft: 100, marginTop: -20 }}>
-          <TouchableOpacity
-            style={styles.heart}
-            onPress={() => setIsFavorite(!isFavorite)}
-          >
-            {isFavorite ? (
-              <HeartIconSolid size={30} color={"red"} />
-            ) : (
-              <HeartIconOutline size={30} color={"#0D1117"} />
-            )}
-          </TouchableOpacity>
-        </View>
+        <View style={{ marginLeft: 100, marginTop: -20 }}></View>
       </View>
+      <TouchableOpacity onPress={handleItemFavorite}>
+        <View
+          style={{
+            backgroundColor: "#2A6D86",
+            width: "50%",
+            height: 40,
+            marginLeft: 100,
+            marginTop: 60,
+            justifyContent: "center",
+            alignItems: "center",
+            borderRadius: 20,
+          }}
+        >
+          <Text style={{ fontWeight: "bold", color: "white" }}>
+            {isItemFavorite
+              ? "Remove from list favorite"
+              : "Add to list favorite"}
+          </Text>
+        </View>
+      </TouchableOpacity>
     </View>
   );
 };

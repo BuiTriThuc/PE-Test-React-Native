@@ -13,7 +13,7 @@ export default function NaviDetail() {
       }}
     >
       <Stack.Screen name="Thuc" component={Home} />
-      <Stack.Screen name="Detail" component={Detail} />
+      <Stack.Screen name="Detailsss" component={Detail} />
     </Stack.Navigator>
   );
 }
