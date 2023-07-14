@@ -12,7 +12,7 @@ export default function ItemCategories({ item, onPressFavorite, isFavorite }) {
   };
 
   return (
-    <TouchableWithoutFeedback>
+    <TouchableOpacity>
       <View style={styles.container}>
         <TouchableOpacity onPress={() => handlePress(item)}>
           <Image
@@ -44,7 +44,7 @@ export default function ItemCategories({ item, onPressFavorite, isFavorite }) {
           </TouchableOpacity>
         </View>
       </View>
-    </TouchableWithoutFeedback>
+    </TouchableOpacity>
   );
 }
 
